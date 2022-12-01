@@ -28,7 +28,7 @@ public class DataBase {
         userMap.put(++id, new User("Романов Максим Игоревич", "мужской", 43));
         userMap.put(++id, new User("Бабушкин Игорь Александрович", "мужской", 17));
         userMap.put(++id, new User("Пятчанин Иван Владимирович", "мужской", 59));
-        userMap.put(++id, new User("Путин Владимир Владимирович", "мужской", 46));
+        userMap.put(++id, new User("Петров Петр Петрович", "мужской", 46));
         userMap.put(++id, new User("Зуева Людмила Николаевна", "женский", 39));
 
         return userMap;
