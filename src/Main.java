@@ -1,9 +1,32 @@
-import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Scanner;
 
 public class Main {
+    private static void findUserByID(int id, HashMap<Integer, User> usersMap) throws IncorrectIDException {
+        /*В методе выведите в консоль информацию о том, какого юзера метод нашел.  Например: “Пользователь Иван Петров id=2 был найден”;*/
+        if (!usersMap.containsKey(id)){
+            System.out.println("Некорректный id");
+            throw new IncorrectIDException();
+        }
+        else {
+            System.out.println("Пользователь " + usersMap.get(id).getName() + " id = " + id + " был найден");
+        }
+
+    }
+    private static void deleteUserByID(int id, HashMap<Integer, User> usersMap) throws IncorrectIDException {
+    /*В методе выведите в консоль информацию о том, какого юзера метод удалил. Например: “Пользователь Иван Петров был удален по id=2”*/
+        if (!usersMap.containsKey(id)){
+            System.out.println("Некорректный id");
+            throw new IncorrectIDException();
+        }
+        else {
+            System.out.println("Пользователь " + usersMap.get(id).getName() + " id = " + id + " был удален");
+            usersMap.remove(id);
+        }
+    }
+
 
     public static void ChangeUser(HashMap usersMap) {
 
@@ -58,8 +81,24 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello world!");
-
+        Scanner inputID = new Scanner(System.in);
         HashMap usersMap = new DataBase().DBUsers();
+
+        System.out.println("Введите id искомого пользователя: ");
+        int id = Integer.parseInt(inputID.nextLine());
+        try {
+            findUserByID(id, usersMap);
+        } catch (IncorrectIDException e) {
+            System.out.println("" + e);
+        }
+
+        System.out.println("Введите id пользователя для удаления: ");
+        id = Integer.parseInt(inputID.nextLine());
+        try {
+            deleteUserByID(id, usersMap);
+        } catch (IncorrectIDException e) {
+            System.out.println("" + e);
+        }
 
         System.out.println("Если вы хотите изменить данные о пользователе, введите 2");
         Scanner inputCommand = new Scanner(System.in);
