@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class DataBase {
 
-    public static HashMap DBUsers() {
+    public static HashMap<Integer,User> DBUsers() {
 
         Integer id = 0;
         HashMap<Integer, User> userMap = new HashMap<>();
