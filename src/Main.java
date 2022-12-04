@@ -4,15 +4,15 @@ import java.util.Scanner;
 import java.util.Scanner;
 
 public class Main {
+    static Boolean abortOperations = false;
     static Scanner input = new Scanner(System.in);
-
     static HashMap<Integer, User> ourUsersDB = new DataBase().DBUsers();
+    // TODO: call DataBase for DBBooks here
 
     private static void findUserByID(int id, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
         /*В методе выведите в консоль информацию о том, какого юзера метод нашел. Например: “Пользователь Иван Петров id=2 был найден”;*/
         if (!ourUsersDB.containsKey(id)) {
             throw new IncorrectIDException("Некорректный id");
-
         } else {
             System.out.println("Пользователь " + ourUsersDB.get(id).getName() + " id = " + id + " был найден");
         }
@@ -49,9 +49,7 @@ public class Main {
         }
     }
 
-
     public static void changeUser(Scanner scanner, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
-
         System.out.println("Введите id пользователя");
         int id = scanner.nextInt();
 
@@ -90,71 +88,79 @@ public class Main {
     }
 
     public static void main(String[] args) throws IncorrectIDException {
-// step 1:
-        System.out.println("Welcome to our DataBase! Please let us know what would you like to do?");
-        System.out.println("* To check Users Database and display all users please enter 1");
-        System.out.println("* To check all books in our Database please enter 2");
-        System.out.println("Your entry >>");
-
-        int selectionOne = input.nextInt();
-
-        if (selectionOne == 1) {
-            System.out.println("You are now in our Users database. Please let us know what would you like to do:");
-            System.out.println("* To see all Users please enter 0");
-            System.out.println("* To search the user by id please enter 1");
-            System.out.println("* To create new user please enter 2");
-            System.out.println("* To change the existing user info please enter 3");
-            System.out.println("* To delete the user by id please enter 4");
-            System.out.println("* To return to main menu please enter 5");
+        // To make the app infinite until we change abortOperations to false
+        while (!abortOperations) {
+            System.out.println("Welcome to our DataBase! Please let us know what would you like to do?");
+            System.out.println("* To check Users Database and display all users please enter 1");
+            System.out.println("* To check all books in our Database please enter 2");
+            System.out.println("* To Exit the app please enter 9");
             System.out.println("Your entry >>");
 
-            int operation = input.nextInt();
+            int selectionOne = input.nextInt();
 
-            if (operation == 0) {
-                System.out.println("Show all users");
-//               showAllUsers();
-            } else if (operation == 1) {
-                searchUserById(input);
-            } else if (operation == 2) {
-// Create new User
-                System.out.println("create new user flow");
-                // createNewUser();
-            } else if (operation == 3) {
-                System.out.println("change the existing user");
-                //change data
-                changeUser(input,ourUsersDB);
+            if (selectionOne == 1) {
+                System.out.println("You are now in our Users database. Please let us know what would you like to do:");
+                System.out.println("* To see all Users please enter 0");
+                System.out.println("* To search the user by id please enter 1");
+                System.out.println("* To create new user please enter 2");
+                System.out.println("* To change the existing user info please enter 3");
+                System.out.println("* To delete the user by id please enter 4");
+                System.out.println("* To return to main menu please enter 5");
+                System.out.println("Your entry >>");
 
-            } else if (operation == 4) {
-                // Delete User
-                System.out.println("to delete the user by id");
-                deleteUser(input);
-            } else if (operation == 5) {
-                System.out.println("main menu");
+                int operation = input.nextInt();
+
+                if (operation == 0) {
+                    // ShowAllUsers
+                    System.out.println("Show all users");
+                    // TODO: showAllUsers();
+                } else if (operation == 1) {
+                    searchUserById(input);
+                } else if (operation == 2) {
+                    // Create new User
+                    System.out.println("create new user flow");
+                    // TODO: createNewUser();
+                } else if (operation == 3) {
+                    // Change data
+                    changeUser(input, ourUsersDB);
+                } else if (operation == 4) {
+                    // Delete User
+                    deleteUser(input);
+                } else if (operation == 5) {
+                    // Return to Main Menu
+                    System.out.println("Main Menu");
+                } else {
+                    throw new IncorrectIDException("Incorrect entry. please try again.");
+                }
+            } else if (selectionOne == 2) {
+                System.out.println("You are now in our Books database. Please let us know what would you like to do?");
+                System.out.println("* To see the list of all Books please enter 0");
+                System.out.println("* To find out who was the last user that took the book please enter 1");
+                System.out.println("* to return to main menu please enter 2");
+                System.out.println("Your entry >>");
+
+                int operation = input.nextInt();
+
+                if (operation == 0) {
+                    // Method to show all books
+                    System.out.println("all books");
+                    // TODO: showAllBooks();
+                } else if (operation == 1) {
+                    // Method to show random book + random user
+                    System.out.println("random book");
+                    // TODO: displayRandom();
+                } else if (operation == 2) {
+                    // Return to main menu
+                    System.out.println("Main Menu");
+                } else {
+                    throw new IncorrectIDException("Incorrect entry. Please try again.");
+                }
+            } else if (selectionOne == 9) {
+                // Stop application once user select 9
+                abortOperations = true;
             } else {
-                throw new IncorrectIDException("Incorrect entry. please try again.");
+                throw new IncorrectIDException("Incorrect entry. Please try again.");
             }
-        } else if (selectionOne == 2) {
-            System.out.println("You are now in our Books database. Please let us know what would you like to do?");
-            System.out.println("* To see the list of all Books please enter 0");
-            System.out.println("* To find out who was the last user that took the book please enter 1");
-            System.out.println("* to return to main menu please enter 2");
-            System.out.println("Your entry >>");
-
-            int operation = input.nextInt();
-
-            if (operation == 0) {
-                System.out.println("all books");
-                // showAllBooks();
-            } else if (operation == 1) {
-                System.out.println("random book");
-                // displayRandom();
-            } else if (operation == 2) {
-                System.out.println("main menu");
-            } else {
-                throw new IncorrectIDException("Incorrect entry. please try again.");
-            }
-        } else {
-            throw new IncorrectIDException("Incorrect entry. please try again.");
         }
     }
 }
