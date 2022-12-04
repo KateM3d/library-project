@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner input = new Scanner(System.in);
+
     static HashMap<Integer, User> ourUsersDB = new DataBase().DBUsers();
 
     private static void findUserByID(int id, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
@@ -16,10 +18,9 @@ public class Main {
         }
     }
 
-    public static void searchUserById() throws IncorrectIDException {
-        Scanner inputID = new Scanner(System.in);
+    public static void searchUserById(Scanner scanner) throws IncorrectIDException {
         System.out.println("Введите id искомого пользователя: ");
-        int id = Integer.parseInt(inputID.nextLine());
+        int id = scanner.nextInt();
         try {
             findUserByID(id, ourUsersDB);
         } catch (IncorrectIDException e) {
@@ -37,24 +38,22 @@ public class Main {
         }
     }
 
-    public static void deleteUser() throws IncorrectIDException {
+    public static void deleteUser(Scanner scanner) throws IncorrectIDException {
         System.out.println("Введите id пользователя для удаления: ");
-        Scanner userToDelete = new Scanner(System.in);
 
-        int idOfUserToDelete = Integer.parseInt(userToDelete.nextLine());
+        int userToDelete = scanner.nextInt();
         try {
-            deleteUserByID(idOfUserToDelete, ourUsersDB);
+            deleteUserByID(userToDelete, ourUsersDB);
         } catch (IncorrectIDException e) {
             throw new IncorrectIDException("Incorrect id");
         }
     }
 
 
-    public static void changeUser(HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
+    public static void changeUser(Scanner scanner, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
 
         System.out.println("Введите id пользователя");
-        Scanner inputId = new Scanner(System.in);
-        int id = inputId.nextInt();
+        int id = scanner.nextInt();
 
         if (ourUsersDB.containsKey(id)) {
             System.out.println("Пользователь с указанным id найден: " + ourUsersDB.get(id));
@@ -64,27 +63,23 @@ public class Main {
             System.out.println("* Изменить возраст - введите 3");
             System.out.println("Your entry >>");
 
-            Scanner inputCommand = new Scanner(System.in);
-            int command = inputCommand.nextInt();
+            int command = scanner.nextInt();
 
             if (command == 1) {
                 System.out.println("Введите новые ФИО");
-                Scanner inputName = new Scanner(System.in);
-                String newName = inputName.nextLine();
+                String newName = scanner.nextLine();
                 String name = ourUsersDB.get(id).getName();
                 ourUsersDB.get(id).setName(newName);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменено имя. Было - " + name + ", стало - " + newName);
             } else if (command == 2) {
                 System.out.println("Введите новый пол");
-                Scanner inputGender = new Scanner(System.in);
-                String newGender = inputGender.nextLine();
+                String newGender = scanner.nextLine();
                 String gender = ourUsersDB.get(id).getGender();
                 ourUsersDB.get(id).setGender(newGender);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменен пол. Было - " + gender + ", стало - " + newGender);
             } else if (command == 3) {
                 System.out.println("Введите новый возраст");
-                Scanner inputAge = new Scanner(System.in);
-                int newAge = inputAge.nextInt();
+                int newAge = scanner.nextInt();
                 int age = ourUsersDB.get(id).getAge();
                 ourUsersDB.get(id).setAge(newAge);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменен возраст. Было - " + age + ", стало - " + newAge);
@@ -101,8 +96,7 @@ public class Main {
         System.out.println("* To check all books in our Database please enter 2");
         System.out.println("Your entry >>");
 
-        Scanner appEntry = new Scanner(System.in);
-        int selectionOne = appEntry.nextInt();
+        int selectionOne = input.nextInt();
 
         if (selectionOne == 1) {
             System.out.println("You are now in our Users database. Please let us know what would you like to do:");
@@ -114,14 +108,13 @@ public class Main {
             System.out.println("* To return to main menu please enter 5");
             System.out.println("Your entry >>");
 
-            Scanner userOperations = new Scanner(System.in);
-            int operation = userOperations.nextInt();
+            int operation = input.nextInt();
 
             if (operation == 0) {
                 System.out.println("Show all users");
 //               showAllUsers();
             } else if (operation == 1) {
-                searchUserById();
+                searchUserById(input);
             } else if (operation == 2) {
 // Create new User
                 System.out.println("create new user flow");
@@ -129,12 +122,12 @@ public class Main {
             } else if (operation == 3) {
                 System.out.println("change the existing user");
                 //change data
-                changeUser(ourUsersDB);
+                changeUser(input,ourUsersDB);
 
             } else if (operation == 4) {
                 // Delete User
                 System.out.println("to delete the user by id");
-                deleteUser();
+                deleteUser(input);
             } else if (operation == 5) {
                 System.out.println("main menu");
             } else {
@@ -147,8 +140,7 @@ public class Main {
             System.out.println("* to return to main menu please enter 2");
             System.out.println("Your entry >>");
 
-            Scanner userOperations = new Scanner(System.in);
-            int operation = userOperations.nextInt();
+            int operation = input.nextInt();
 
             if (operation == 0) {
                 System.out.println("all books");
