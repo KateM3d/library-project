@@ -16,6 +16,7 @@ public class Book {
     }
 
     public String toString() {
-        return "(" + name + ", " + author + ", " + genre + ", " + datePublished + ", " + dateBorrowed + ", " + dateReturned + ")";
+        return name + " " + author + " " + genre + " " + datePublished + " " + dateBorrowed + " " + dateReturned;
     }
+
 }

@@ -1,5 +1,6 @@
 import java.util.HashMap;
 
+
 public class DataBase {
 
     public static HashMap<Integer, User> DBUsers() {
@@ -29,6 +30,25 @@ public class DataBase {
         userMap.put(++id, new User("Зуева Людмила Николаевна", "женский", 39));
 
         return userMap;
+
+    }
+
+    public static HashMap<Integer,Book> DBBooks() {
+        Integer id = 0;
+        HashMap<Integer, Book> bookMap = new HashMap<>();
+
+        bookMap.put(++id, new Book("React: современные шаблоны для разработки приложений", "Алекс Бэнкс", "Программирование", 2020, "02.09.2022", "15.09.2022"));
+        bookMap.put(++id, new Book("Приём «Эффективное прощение»", "Александр Свияш", "Психология", 2019, "12.09.2022", "30.09.2022"));
+        bookMap.put(++id, new Book("20 ментальных ловушек, которые душат, отравляют и подвергают гниению успешную и счастливую жизнь", "Лариса Большакова", "Психология", 2010, "02.10.2022", "17.10.2022"));
+        bookMap.put(++id, new Book("a", "b", "c", 2010, "f", "g"));
+        bookMap.put(++id, new Book("CSS для профи", "Кит Грант", "рпограммирование", 2018, "15.10.2022", "01.11.2022"));
+        bookMap.put(++id, new Book("Коллагеновая диета", "Джош Акс", "Здоровье", 2019, "02.09.2022", "18.09.2022"));
+        bookMap.put(++id, new Book("Воспитай в себе лидера 2.0", "Джон Максвелл", "Психология", 2018, "13.09.2022", "29.09.2022"));
+
+
+
+        System.out.println(bookMap);
+        return bookMap;
 
     }
 
