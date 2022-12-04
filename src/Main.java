@@ -1,13 +1,12 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.Scanner;
 
 public class Main {
     static Boolean abortOperations = false;
     static Scanner input = new Scanner(System.in);
     static HashMap<Integer, User> ourUsersDB = new DataBase().DBUsers();
-    // TODO: call DataBase for DBBooks here
+    static HashMap<Integer, Book> ourBooksDB = new DataBase().DBBooks();
+
 
     private static void findUserByID(int id, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
         /*В методе выведите в консоль информацию о том, какого юзера метод нашел. Например: “Пользователь Иван Петров id=2 был найден”;*/
@@ -87,6 +86,14 @@ public class Main {
         }
     }
 
+    public static void displayRandom() {
+        Random randomValue = new Random();
+        // TODO: change randomBook to 21 once all books entered
+        Integer randomBook = randomValue.nextInt(1, 8);
+        Integer randomUser = randomValue.nextInt(1, 21);
+        System.out.println(ourBooksDB.get(randomBook).name + " written by " + ourBooksDB.get(randomBook).author + " with id " + randomBook + " was taken by " + ourUsersDB.get(randomUser).getName() + " on " + ourBooksDB.get(randomBook).dateBorrowed + " and returned " + ourBooksDB.get(randomBook).dateReturned);
+    }
+
     public static void main(String[] args) throws IncorrectIDException {
         // To make the app infinite until we change abortOperations to false
         while (!abortOperations) {
@@ -111,7 +118,7 @@ public class Main {
                 int operation = input.nextInt();
 
                 if (operation == 0) {
-                    // ShowAllUsers
+                    // Show all users
                     System.out.println("Show all users");
                     // TODO: showAllUsers();
                 } else if (operation == 1) {
@@ -135,7 +142,7 @@ public class Main {
             } else if (selectionOne == 2) {
                 System.out.println("You are now in our Books database. Please let us know what would you like to do?");
                 System.out.println("* To see the list of all Books please enter 0");
-                System.out.println("* To find out who was the last user that took the book please enter 1");
+                System.out.println("* To find out a random entry in our database please enter 1");
                 System.out.println("* to return to main menu please enter 2");
                 System.out.println("Your entry >>");
 
@@ -147,8 +154,7 @@ public class Main {
                     // TODO: showAllBooks();
                 } else if (operation == 1) {
                     // Method to show random book + random user
-                    System.out.println("random book");
-                    // TODO: displayRandom();
+                    displayRandom();
                 } else if (operation == 2) {
                     // Return to main menu
                     System.out.println("Main Menu");

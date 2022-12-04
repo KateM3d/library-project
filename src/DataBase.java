@@ -33,7 +33,7 @@ public class DataBase {
 
     }
 
-    public static HashMap<Integer,Book> DBBooks() {
+    public static HashMap<Integer, Book> DBBooks() {
         Integer id = 0;
         HashMap<Integer, Book> bookMap = new HashMap<>();
 
@@ -44,7 +44,6 @@ public class DataBase {
         bookMap.put(++id, new Book("CSS для профи", "Кит Грант", "рпограммирование", 2018, "15.10.2022", "01.11.2022"));
         bookMap.put(++id, new Book("Коллагеновая диета", "Джош Акс", "Здоровье", 2019, "02.09.2022", "18.09.2022"));
         bookMap.put(++id, new Book("Воспитай в себе лидера 2.0", "Джон Максвелл", "Психология", 2018, "13.09.2022", "29.09.2022"));
-
 
 
         System.out.println(bookMap);
