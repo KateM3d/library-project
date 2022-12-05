@@ -64,13 +64,13 @@ public class Main {
 
             if (command == 1) {
                 System.out.println("Введите новые ФИО");
-                String newName = scanner.nextLine();
+                String newName = scanner.next();
                 String name = ourUsersDB.get(id).getName();
                 ourUsersDB.get(id).setName(newName);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменено имя. Было - " + name + ", стало - " + newName);
             } else if (command == 2) {
                 System.out.println("Введите новый пол");
-                String newGender = scanner.nextLine();
+                String newGender = scanner.next();
                 String gender = ourUsersDB.get(id).getGender();
                 ourUsersDB.get(id).setGender(newGender);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменен пол. Было - " + gender + ", стало - " + newGender);
