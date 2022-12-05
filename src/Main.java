@@ -64,7 +64,8 @@ public class Main {
 
             if (command == 1) {
                 System.out.println("Введите новые ФИО");
-                String newName = scanner.next();
+                String newName = scanner.useDelimiter("\\n").next();
+                scanner.reset();
                 String name = ourUsersDB.get(id).getName();
                 ourUsersDB.get(id).setName(newName);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменено имя. Было - " + name + ", стало - " + newName);
@@ -97,7 +98,7 @@ public class Main {
     public static void main(String[] args) throws IncorrectIDException {
         // To make the app infinite until we change abortOperations to false
         while (!abortOperations) {
-            System.out.println("Welcome to our DataBase! Please let us know what would you like to do?");
+            System.out.println("\nWelcome to our DataBase! Please let us know what would you like to do?");
             System.out.println("* To check Users Database and display all users please enter 1");
             System.out.println("* To check all books in our Database please enter 2");
             System.out.println("* To Exit the app please enter 9");
