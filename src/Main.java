@@ -53,12 +53,8 @@ public class Main {
         int id = scanner.nextInt();
 
         if (ourUsersDB.containsKey(id)) {
-            System.out.println("Пользователь с указанным id найден: " + ourUsersDB.get(id));
-            System.out.println("Укажите данные, которые хотите изменить:");
-            System.out.println("* Изменить ФИО - введите 1");
-            System.out.println("* Изменить пол - введите 2");
-            System.out.println("* Изменить возраст - введите 3");
-            System.out.println("Your entry >>");
+            System.out.println("\nПользователь с указанным id найден: " + ourUsersDB.get(id));
+            System.out.println("\nУкажите данные, которые хотите изменить: \n* Изменить ФИО - введите 1 \n* Изменить пол - введите 2 \n* Изменить возраст - введите 3 \nYour entry >>");
 
             int command = scanner.nextInt();
 
@@ -98,23 +94,12 @@ public class Main {
     public static void main(String[] args) throws IncorrectIDException {
         // To make the app infinite until we change abortOperations to false
         while (!abortOperations) {
-            System.out.println("\nWelcome to our DataBase! Please let us know what would you like to do?");
-            System.out.println("* To check Users Database and display all users please enter 1");
-            System.out.println("* To check all books in our Database please enter 2");
-            System.out.println("* To Exit the app please enter 9");
-            System.out.println("Your entry >>");
+            System.out.println("\nWelcome to our DataBase! Please let us know what would you like to do? \n* To check Users Database and display all users please enter 1 \n* To check all books in our Database please enter 2 \n* To Exit the app please enter 9 \nYour entry >>");
 
             int selectionOne = input.nextInt();
 
             if (selectionOne == 1) {
-                System.out.println("You are now in our Users database. Please let us know what would you like to do:");
-                System.out.println("* To see all Users please enter 0");
-                System.out.println("* To search the user by id please enter 1");
-                System.out.println("* To create new user please enter 2");
-                System.out.println("* To change the existing user info please enter 3");
-                System.out.println("* To delete the user by id please enter 4");
-                System.out.println("* To return to main menu please enter 5");
-                System.out.println("Your entry >>");
+                System.out.println("You are now in our Users database. Please let us know what would you like to do: \n* To see all Users please enter 0\n* To search the user by id please enter 1 \n* To create new user please enter 2 \n* To change the existing user info please enter 3 \n* To delete the user by id please enter 4 \n* To return to main menu please enter 5 \nYour entry >>");
 
                 int operation = input.nextInt();
 
@@ -141,11 +126,7 @@ public class Main {
                     throw new IncorrectIDException("Incorrect entry. please try again.");
                 }
             } else if (selectionOne == 2) {
-                System.out.println("You are now in our Books database. Please let us know what would you like to do?");
-                System.out.println("* To see the list of all Books please enter 0");
-                System.out.println("* To find out a random entry in our database please enter 1");
-                System.out.println("* to return to main menu please enter 2");
-                System.out.println("Your entry >>");
+                System.out.println("You are now in our Books database. Please let us know what would you like to do? \n* To see the list of all Books please enter 0 \n* To find out a random entry in our database please enter 1 \n* to return to main menu please enter 2 \nYour entry >> ");
 
                 int operation = input.nextInt();
 
