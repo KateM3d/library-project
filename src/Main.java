@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Main {
     static Boolean abortOperations = false;
     static Scanner input = new Scanner(System.in);
-    static HashMap<Integer, User> ourUsersDB = new DataBase().DBUsers();
-    static HashMap<Integer, Book> ourBooksDB = new DataBase().DBBooks();
+    static HashMap<Integer, User> ourUsersDB = DataBase.DBUsers();
+    static HashMap<Integer, Book> ourBooksDB = DataBase.DBBooks();
 
 
     private static void findUserByID(int id, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
