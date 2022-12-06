@@ -103,7 +103,12 @@ public class Main {
     public static ArrayList<String> getAllUsersNames (){
         ArrayList<String> allNames = new ArrayList<>();
         for(int i = 1; i <= ourUsersDB.size(); i++) {
-            allNames.add(ourUsersDB.get(i).getName());
+            if (ourUsersDB.get(i) == null){
+                continue;
+            }
+            else {
+                allNames.add(ourUsersDB.get(i).getName());
+            }
         }
         return allNames;
     }
@@ -118,7 +123,7 @@ public class Main {
             if (getAllUsersNames().contains(newName)) {
                 throw new IncorrectIDException("Данный пользователь уже существует");
             } else {
-                id = ourUsersDB.size();
+                id = Collections.max(ourUsersDB.keySet()); //ourUsersDB.size();
                 System.out.println("Введите пол нового пользователя: ");
                 String newGender = scanner.next();
                 System.out.println("Введите возраст нового пользователя: ");
@@ -140,7 +145,7 @@ public class Main {
             int selectionOne = input.nextInt();
 
             if (selectionOne == 0) {
-                System.out.println("You are now in our Users database. Please let us know what would you like to do: \n* To see all Users please enter 0\n* To search the user by id please enter 1 \n* To create new user please enter 2 \n* To change the existing user info please enter 3 \n* To delete the user by id please enter 4 \n* To return to main menu please enter 5 \nYour entry >>");
+                System.out.println("You are now in our Users database. Please let us know what would you like to do: \n* To see all Users please enter 0\n* To search the user by id please enter 1 \n* To create new user please enter 2 \n* To change the existing user info please enter 3 \n* To delete the user by id please enter 4 \n* To return to main menu please enter 9 \nYour entry >>");
 
                 int operation = input.nextInt();
 
@@ -160,14 +165,14 @@ public class Main {
                 } else if (operation == 4) {
                     // Delete User
                     deleteUser(input);
-                } else if (operation == 5) {
+                } else if (operation == 9) {
                     // Return to Main Menu
                     System.out.println("Main Menu");
                 } else {
                     throw new IncorrectIDException("Incorrect entry. please try again.");
                 }
             } else if (selectionOne == 1) {
-                System.out.println("You are now in our Books database. Please let us know what would you like to do? \n* To see the list of all Books please enter 0 \n* To find out a random entry in our database please enter 1 \n* to return to main menu please enter 2 \nYour entry >> ");
+                System.out.println("You are now in our Books database. Please let us know what would you like to do? \n* To see the list of all Books please enter 0 \n* To find out a random entry in our database please enter 1 \n* to return to main menu please enter 9 \nYour entry >> ");
 
                 int operation = input.nextInt();
 
@@ -179,7 +184,7 @@ public class Main {
                 } else if (operation == 1) {
                     // Method to show random book + random user
                     displayRandom();
-                } else if (operation == 2) {
+                } else if (operation == 9) {
                     // Return to main menu
                     System.out.println("Main Menu");
                 } else {
