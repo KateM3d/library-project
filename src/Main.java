@@ -90,6 +90,10 @@ public class Main {
         Integer randomUser = randomValue.nextInt(1, 21);
         System.out.println(ourBooksDB.get(randomBook).name + " written by " + ourBooksDB.get(randomBook).author + " with id " + randomBook + " was taken by " + ourUsersDB.get(randomUser).getName() + " on " + ourBooksDB.get(randomBook).dateBorrowed + " and returned " + ourBooksDB.get(randomBook).dateReturned);
     }
+    
+    public static void showAllBooks() {
+        System.out.println("В библиотеке имеются следующие книги:");
+    }
 
     public static void main(String[] args) throws IncorrectIDException {
         // To make the app infinite until we change abortOperations to false
@@ -133,7 +137,8 @@ public class Main {
                 if (operation == 0) {
                     // Method to show all books
                     System.out.println("all books");
-                    // TODO: showAllBooks();
+                    // Method to show all our books
+                    showAllBooks();
                 } else if (operation == 1) {
                     // Method to show random book + random user
                     displayRandom();
