@@ -95,6 +95,11 @@ public class Main {
         System.out.println("В библиотеке имеются следующие книги:");
     }
 
+    public static void allUsersInfo(HashMap usersMap) {
+        ArrayList<User> values = new ArrayList<>(usersMap.values());
+        System.out.println("База данных пользователей библиотеки: " + "\n" + values);
+    }
+
     public static ArrayList<String> getAllUsersNames (){
         ArrayList<String> allNames = new ArrayList<>();
         for(int i = 1; i <= ourUsersDB.size(); i++) {
@@ -102,6 +107,7 @@ public class Main {
         }
         return allNames;
     }
+
     public static void createNewUser(Scanner scanner) throws IncorrectIDException {
         System.out.println("Введите имя нового пользователя: ");
         Integer id = 0;
@@ -137,13 +143,13 @@ public class Main {
                 if (operation == 0) {
                     // Show all users
                     System.out.println("Show all users");
-                    // TODO: showAllUsers();
+                    allUsersInfo(ourUsersDB);
                 } else if (operation == 1) {
                     searchUserById(input);
                 } else if (operation == 2) {
                     // Create new User
                     System.out.println("create new user flow");
-                    // TODO: createNewUser();
+                    createNewUser(input);
                 } else if (operation == 3) {
                     // Change data
                     changeUser(input, ourUsersDB);
