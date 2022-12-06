@@ -30,7 +30,7 @@ public class User {
     }
 
     public String toString() {
-        return "(" + name + ", " + gender + ", " + age + ")" + "\n";
+        return "\n"+"(" + name + ", " + gender + ", " + age + ")";
     }
 
     public User(String name, String gender, Integer age) {

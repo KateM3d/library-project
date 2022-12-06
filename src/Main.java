@@ -39,7 +39,6 @@ public class Main {
 
     public static void deleteUser(Scanner scanner) throws IncorrectIDException {
         System.out.println("Введите id пользователя для удаления: ");
-
         int userToDelete = scanner.nextInt();
         try {
             deleteUserByID(userToDelete, ourUsersDB);
@@ -51,13 +50,11 @@ public class Main {
     public static void changeUser(Scanner scanner, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
         System.out.println("Введите id пользователя");
         int id = scanner.nextInt();
-
         if (ourUsersDB.containsKey(id)) {
             System.out.println("\nПользователь с указанным id найден: " + ourUsersDB.get(id));
             System.out.println("\nУкажите данные, которые хотите изменить: \n* Изменить ФИО - введите 0 \n* Изменить пол - введите 1 \n* Изменить возраст - введите 2 \nYour entry >>");
 
             int command = scanner.nextInt();
-
             if (command == 0) {
                 System.out.println("Введите новые ФИО");
                 String newName = scanner.useDelimiter("\n").next();
@@ -85,9 +82,8 @@ public class Main {
 
     public static void displayRandom() {
         Random randomValue = new Random();
-        // TODO: change randomBook to 21 once all books entered
-        Integer randomBook = randomValue.nextInt(1, 8);
-        Integer randomUser = randomValue.nextInt(1, 21);
+        Integer randomBook = randomValue.nextInt(1, ourBooksDB.size());
+        Integer randomUser = randomValue.nextInt(1, ourUsersDB.size());
         System.out.println(ourBooksDB.get(randomBook).name + " written by " + ourBooksDB.get(randomBook).author + " with id " + randomBook + " was taken by " + ourUsersDB.get(randomUser).getName() + " on " + ourBooksDB.get(randomBook).dateBorrowed + " and returned " + ourBooksDB.get(randomBook).dateReturned);
     }
 
@@ -141,23 +137,19 @@ public class Main {
         // To make the app infinite until we change abortOperations to false
         while (!abortOperations) {
             System.out.println("\nWelcome to our DataBase! Please let us know what would you like to do? \n* To check Users Database and display all users please enter 0 \n* To check all books in our Database please enter 1 \n* To Exit the app please enter 9 \nYour entry >>");
-
             int selectionOne = input.nextInt();
 
             if (selectionOne == 0) {
                 System.out.println("You are now in our Users database. Please let us know what would you like to do: \n* To see all Users please enter 0\n* To search the user by id please enter 1 \n* To create new user please enter 2 \n* To change the existing user info please enter 3 \n* To delete the user by id please enter 4 \n* To return to main menu please enter 9 \nYour entry >>");
-
                 int operation = input.nextInt();
 
                 if (operation == 0) {
                     // Show all users
-                    System.out.println("Show all users");
                     allUsersInfo(ourUsersDB);
                 } else if (operation == 1) {
                     searchUserById(input);
                 } else if (operation == 2) {
                     // Create new User
-                    System.out.println("create new user flow");
                     createNewUser(input);
                 } else if (operation == 3) {
                     // Change data
@@ -173,13 +165,10 @@ public class Main {
                 }
             } else if (selectionOne == 1) {
                 System.out.println("You are now in our Books database. Please let us know what would you like to do? \n* To see the list of all Books please enter 0 \n* To find out a random entry in our database please enter 1 \n* to return to main menu please enter 9 \nYour entry >> ");
-
                 int operation = input.nextInt();
 
                 if (operation == 0) {
                     // Method to show all books
-                    System.out.println("all books");
-                    // Method to show all our books
                     showAllBooks();
                 } else if (operation == 1) {
                     // Method to show random book + random user
