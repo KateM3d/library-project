@@ -95,6 +95,33 @@ public class Main {
         System.out.println("В библиотеке имеются следующие книги:");
     }
 
+    public static ArrayList<String> getAllUsersNames (){
+        ArrayList<String> allNames = new ArrayList<>();
+        for(int i = 1; i <= ourUsersDB.size(); i++) {
+            allNames.add(ourUsersDB.get(i).getName());
+        }
+        return allNames;
+    }
+    public static void createNewUser(Scanner scanner) throws IncorrectIDException {
+        System.out.println("Введите имя нового пользователя: ");
+        Integer id = 0;
+        String newName = scanner.useDelimiter("\\n").next();
+        scanner.reset();
+        try {
+            getAllUsersNames();
+            if (getAllUsersNames().contains(newName)) {
+                throw new IncorrectIDException("Данный пользователь уже существует");
+            } else {
+                id += ourUsersDB.size();
+                ++id;
+                System.out.println("Пользователь " + newName + " id = " + id + " создался в базе данных");
+            }
+        } catch (IncorrectIDException e) {
+            throw new IncorrectIDException("Данный пользователь уже существует");
+        }
+    }
+
+
     public static void main(String[] args) throws IncorrectIDException {
         // To make the app infinite until we change abortOperations to false
         while (!abortOperations) {
