@@ -54,24 +54,24 @@ public class Main {
 
         if (ourUsersDB.containsKey(id)) {
             System.out.println("\nПользователь с указанным id найден: " + ourUsersDB.get(id));
-            System.out.println("\nУкажите данные, которые хотите изменить: \n* Изменить ФИО - введите 1 \n* Изменить пол - введите 2 \n* Изменить возраст - введите 3 \nYour entry >>");
+            System.out.println("\nУкажите данные, которые хотите изменить: \n* Изменить ФИО - введите 0 \n* Изменить пол - введите 1 \n* Изменить возраст - введите 2 \nYour entry >>");
 
             int command = scanner.nextInt();
 
-            if (command == 1) {
+            if (command == 0) {
                 System.out.println("Введите новые ФИО");
-                String newName = scanner.useDelimiter("\\n").next();
+                String newName = scanner.useDelimiter("\n").next();
                 scanner.reset();
                 String name = ourUsersDB.get(id).getName();
                 ourUsersDB.get(id).setName(newName);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменено имя. Было - " + name + ", стало - " + newName);
-            } else if (command == 2) {
+            } else if (command == 1) {
                 System.out.println("Введите новый пол");
                 String newGender = scanner.next();
                 String gender = ourUsersDB.get(id).getGender();
                 ourUsersDB.get(id).setGender(newGender);
                 System.out.println("У пользователя " + ourUsersDB.get(id) + " изменен пол. Было - " + gender + ", стало - " + newGender);
-            } else if (command == 3) {
+            } else if (command == 2) {
                 System.out.println("Введите новый возраст");
                 int newAge = scanner.nextInt();
                 int age = ourUsersDB.get(id).getAge();
@@ -90,7 +90,7 @@ public class Main {
         Integer randomUser = randomValue.nextInt(1, 21);
         System.out.println(ourBooksDB.get(randomBook).name + " written by " + ourBooksDB.get(randomBook).author + " with id " + randomBook + " was taken by " + ourUsersDB.get(randomUser).getName() + " on " + ourBooksDB.get(randomBook).dateBorrowed + " and returned " + ourBooksDB.get(randomBook).dateReturned);
     }
-    
+
     public static void showAllBooks() {
         System.out.println("В библиотеке имеются следующие книги:");
     }
@@ -111,15 +111,19 @@ public class Main {
     public static void createNewUser(Scanner scanner) throws IncorrectIDException {
         System.out.println("Введите имя нового пользователя: ");
         Integer id = 0;
-        String newName = scanner.useDelimiter("\\n").next();
+        String newName = scanner.useDelimiter("\n").next();
         scanner.reset();
         try {
             getAllUsersNames();
             if (getAllUsersNames().contains(newName)) {
                 throw new IncorrectIDException("Данный пользователь уже существует");
             } else {
-                id += ourUsersDB.size();
-                ++id;
+                id = ourUsersDB.size();
+                System.out.println("Введите пол нового пользователя: ");
+                String newGender = scanner.next();
+                System.out.println("Введите возраст нового пользователя: ");
+                int newAge = scanner.nextInt();
+                ourUsersDB.put(++id, new User(newName, newGender, newAge));
                 System.out.println("Пользователь " + newName + " id = " + id + " создался в базе данных");
             }
         } catch (IncorrectIDException e) {
@@ -131,11 +135,11 @@ public class Main {
     public static void main(String[] args) throws IncorrectIDException {
         // To make the app infinite until we change abortOperations to false
         while (!abortOperations) {
-            System.out.println("\nWelcome to our DataBase! Please let us know what would you like to do? \n* To check Users Database and display all users please enter 1 \n* To check all books in our Database please enter 2 \n* To Exit the app please enter 9 \nYour entry >>");
+            System.out.println("\nWelcome to our DataBase! Please let us know what would you like to do? \n* To check Users Database and display all users please enter 0 \n* To check all books in our Database please enter 1 \n* To Exit the app please enter 9 \nYour entry >>");
 
             int selectionOne = input.nextInt();
 
-            if (selectionOne == 1) {
+            if (selectionOne == 0) {
                 System.out.println("You are now in our Users database. Please let us know what would you like to do: \n* To see all Users please enter 0\n* To search the user by id please enter 1 \n* To create new user please enter 2 \n* To change the existing user info please enter 3 \n* To delete the user by id please enter 4 \n* To return to main menu please enter 5 \nYour entry >>");
 
                 int operation = input.nextInt();
@@ -162,7 +166,7 @@ public class Main {
                 } else {
                     throw new IncorrectIDException("Incorrect entry. please try again.");
                 }
-            } else if (selectionOne == 2) {
+            } else if (selectionOne == 1) {
                 System.out.println("You are now in our Books database. Please let us know what would you like to do? \n* To see the list of all Books please enter 0 \n* To find out a random entry in our database please enter 1 \n* to return to main menu please enter 2 \nYour entry >> ");
 
                 int operation = input.nextInt();
