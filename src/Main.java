@@ -88,10 +88,10 @@ public class Main {
     }
 
     public static void showAllBooks() {
+        System.out.println("Next books there are in the our library:");
         for (Map.Entry<Integer, Book> book : ourBooksDB.entrySet()) {
             System.out.println(book);
         }
-        System.out.println("В библиотеке имеются следующие книги:");
     }
 
     public static void allUsersInfo(HashMap usersMap) {
