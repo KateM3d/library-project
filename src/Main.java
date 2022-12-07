@@ -88,6 +88,9 @@ public class Main {
     }
 
     public static void showAllBooks() {
+        for (Map.Entry<Integer, Book> book : ourBooksDB.entrySet()) {
+            System.out.println(book);
+        }
         System.out.println("В библиотеке имеются следующие книги:");
     }
 
