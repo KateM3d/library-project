@@ -7,47 +7,35 @@ public class Main {
     static HashMap<Integer, User> ourUsersDB = DataBase.DBUsers();
     static HashMap<Integer, Book> ourBooksDB = DataBase.DBBooks();
 
-
-    private static void findUserByID(int id, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
-        /*В методе выведите в консоль информацию о том, какого юзера метод нашел. Например: “Пользователь Иван Петров id=2 был найден”;*/
+    private static boolean isUserInDb(int id, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
         if (!ourUsersDB.containsKey(id)) {
             throw new IncorrectIDException("Некорректный id");
         } else {
-            System.out.println("Пользователь " + ourUsersDB.get(id).getName() + " id = " + id + " был найден");
+            return true;
         }
     }
-
     public static void searchUserById(Scanner scanner) throws IncorrectIDException {
         System.out.println("Введите id искомого пользователя: ");
         int id = scanner.nextInt();
-        try {
-            findUserByID(id, ourUsersDB);
-        } catch (IncorrectIDException e) {
+        if (isUserInDb(id, ourUsersDB)) {
+            System.out.println("Пользователь " + ourUsersDB.get(id).getName() + " id = " + id + " был найден");
+        } else {
             throw new IncorrectIDException("Incorrect entry please try again");
         }
     }
-
-    private static void deleteUserByID(int id, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
-        /*В методе выведите в консоль информацию о том, какого юзера метод удалил. Например: “Пользователь Иван Петров был удален по id=2”*/
-        if (!ourUsersDB.containsKey(id)) {
-            throw new IncorrectIDException("Некорректный id");
-        } else {
-            System.out.println("Пользователь " + ourUsersDB.get(id).getName() + " id = " + id + " был удален");
-            ourUsersDB.remove(id);
-        }
-    }
-
     public static void deleteUser(Scanner scanner) throws IncorrectIDException {
         System.out.println("Введите id пользователя для удаления: ");
         int userToDelete = scanner.nextInt();
-        try {
-            deleteUserByID(userToDelete, ourUsersDB);
-        } catch (IncorrectIDException e) {
+        if (isUserInDb(userToDelete, ourUsersDB)) {
+            System.out.println("Пользователь " + ourUsersDB.get(userToDelete).getName() + " id = " + userToDelete + " был удален");
+            ourUsersDB.remove(userToDelete);
+        } else {
             throw new IncorrectIDException("Incorrect id");
         }
     }
 
-    public static void changeUser(Scanner scanner, HashMap<Integer, User> ourUsersDB) throws IncorrectIDException {
+    public static void changeUser(Scanner scanner, HashMap<Integer, User> ourUsersDB) throws
+            IncorrectIDException {
         System.out.println("Введите id пользователя");
         int id = scanner.nextInt();
         if (ourUsersDB.containsKey(id)) {
@@ -94,18 +82,18 @@ public class Main {
         }
     }
 
-    public static void allUsersInfo(HashMap usersMap) {
+    public static void displayAllUsers(HashMap usersMap) {
         ArrayList<User> values = new ArrayList<>(usersMap.values());
         System.out.println("База данных пользователей библиотеки: " + "\n" + values);
+
     }
 
-    public static ArrayList<String> getAllUsersNames (){
+    public static ArrayList<String> getAllUsersNames() {
         ArrayList<String> allNames = new ArrayList<>();
-        for(int i = 1; i <= ourUsersDB.size(); i++) {
-            if (ourUsersDB.get(i) == null){
+        for (int i = 1; i <= ourUsersDB.size(); i++) {
+            if (ourUsersDB.get(i) == null) {
                 continue;
-            }
-            else {
+            } else {
                 allNames.add(ourUsersDB.get(i).getName());
             }
         }
@@ -135,7 +123,6 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) throws IncorrectIDException {
         // To make the app infinite until we change abortOperations to false
         while (!abortOperations) {
@@ -145,23 +132,17 @@ public class Main {
             if (selectionOne == 0) {
                 System.out.println("You are now in our Users database. Please let us know what would you like to do: \n* To see all Users please enter 0\n* To search the user by id please enter 1 \n* To create new user please enter 2 \n* To change the existing user info please enter 3 \n* To delete the user by id please enter 4 \n* To return to main menu please enter 9 \nYour entry >>");
                 int operation = input.nextInt();
-
                 if (operation == 0) {
-                    // Show all users
-                    allUsersInfo(ourUsersDB);
+                    displayAllUsers(ourUsersDB);
                 } else if (operation == 1) {
                     searchUserById(input);
                 } else if (operation == 2) {
-                    // Create new User
                     createNewUser(input);
                 } else if (operation == 3) {
-                    // Change data
                     changeUser(input, ourUsersDB);
                 } else if (operation == 4) {
-                    // Delete User
                     deleteUser(input);
                 } else if (operation == 9) {
-                    // Return to Main Menu
                     System.out.println("Main Menu");
                 } else {
                     throw new IncorrectIDException("Incorrect entry. please try again.");
@@ -169,15 +150,11 @@ public class Main {
             } else if (selectionOne == 1) {
                 System.out.println("You are now in our Books database. Please let us know what would you like to do? \n* To see the list of all Books please enter 0 \n* To find out a random entry in our database please enter 1 \n* to return to main menu please enter 9 \nYour entry >> ");
                 int operation = input.nextInt();
-
                 if (operation == 0) {
-                    // Method to show all books
                     showAllBooks();
                 } else if (operation == 1) {
-                    // Method to show random book + random user
                     displayRandom();
                 } else if (operation == 9) {
-                    // Return to main menu
                     System.out.println("Main Menu");
                 } else {
                     throw new IncorrectIDException("Incorrect entry. Please try again.");
