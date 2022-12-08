@@ -90,7 +90,8 @@ public class Main {
 
     public static ArrayList<String> getAllUsersNames() {
         ArrayList<String> allNames = new ArrayList<>();
-        for (int i = 1; i <= ourUsersDB.size(); i++) {
+        //for (int i = 1; i <= ourUsersDB.size(); i++) {
+        for (int i = 1; i <= Collections.max(ourUsersDB.keySet()); i++) {
             if (ourUsersDB.get(i) == null) {
                 continue;
             } else {
